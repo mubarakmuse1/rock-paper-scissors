@@ -1,14 +1,11 @@
+ ## Game Screenshot
+
 <img width="1432" height="726" alt="Screenshot 2026-11-17 at 16 41 55" src="https://github.com/user-attachments/assets/caa5c5dc-b798-4932-9e11-0be77d806ce0" />
 # Rock, Paper, Scissors Game
 
 This is a simple Rock, Paper, Scissors game I built using HTML, CSS, and JavaScript. You can play against the computer, choose your move, and see who wins each round.
 
 I created this project to practice my JavaScript skills and learn how to make a website interactive.
-
-## Game Screenshot
-
-![Rock Paper Scissors Game]
-
 
 ## Features
 
