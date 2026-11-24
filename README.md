@@ -1,6 +1,7 @@
  ## Game Screenshot
 
-<img width="1432" height="726" alt="Screenshot 2026-11-17 at 16 41 55" src="https://github.com/user-attachments/assets/caa5c5dc-b798-4932-9e11-0be77d806ce0" />
+<img width="845" height="735" alt="Screenshot 2026-11-24 at 12 23 15" src="https://github.com/user-attachments/assets/a69e0372-d1e8-4c41-add8-542811cdc506" />
+
 # Rock, Paper, Scissors Game
 
 This is a simple Rock, Paper, Scissors game I built using HTML, CSS, and JavaScript. You can play against the computer, choose your move, and see who wins each round.
@@ -75,3 +76,5 @@ While building this project, I practiced some important JavaScript concepts, inc
 This project helped me understand how HTML, CSS, and JavaScript work together to create an interactive website.
 
 Thanks for checking out my project!
+
+🎮 Play it here:https://rock-paper-scissors-f3t2.netlify.app/
