@@ -1,144 +1,376 @@
+/* =====================================
+   NEON ARCADE — ROCK PAPER SCISSORS
+===================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap");
+
+:root {
+  --bg: #080b18;
+  --surface: #11172b;
+  --surface-light: #19223c;
+  --purple: #a855f7;
+  --cyan: #22d3ee;
+  --pink: #f472b6;
+  --green: #4ade80;
+  --red: #fb7185;
+  --text: #f8fafc;
+  --muted: #94a3b8;
+}
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+  min-height: 100vh;
+  padding: 25px 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Inter", sans-serif;
+  color: var(--text);
+
+  background:
+    radial-gradient(ellipse at 15% 15%, #42208055, transparent 40%),
+    radial-gradient(ellipse at 85% 85%, #07598544, transparent 40%), var(--bg);
 }
+
+/* GAME CONTAINER */
 
 .game-container {
-    background: white;
-    width: 100%;
-    max-width: 500px;
-    padding: 35px 25px;
-    border-radius: 20px;
-    text-align: center;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 540px;
+  padding: 35px 28px;
+  background: rgba(17, 23, 43, 0.94);
+  border: 1px solid #a855f744;
+  border-radius: 24px;
+  text-align: center;
+
+  box-shadow:
+    0 0 30px #a855f71a,
+    0 25px 80px #00000066;
+
+  backdrop-filter: blur(15px);
 }
 
-h1 {
-    color: #333;
-    font-size: 28px;
-    margin-bottom: 10px;
+/* HEADER */
+
+.game-header h1 {
+  font-family: "Orbitron", sans-serif;
+  font-size: clamp(21px, 5vw, 29px);
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin-bottom: 12px;
+
+  background: linear-gradient(90deg, var(--cyan), var(--purple), var(--pink));
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .subtitle {
-    color: #777;
-    margin-bottom: 30px;
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 32px;
 }
 
+/* SCOREBOARD */
+
 .score-board {
-    display: flex;
-    justify-content: space-around;
-    background: #f3f4f6;
-    padding: 20px;
-    border-radius: 15px;
-    margin-bottom: 25px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 24px 15px;
+  background: linear-gradient(145deg, #19223c, #101629);
+  border: 1px solid #ffffff12;
+  border-radius: 18px;
+  margin-bottom: 14px;
 }
 
 .score h3 {
-    color: #555;
-    margin-bottom: 8px;
+  font-family: "Orbitron", sans-serif;
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 12px;
 }
 
 .score p {
-    font-size: 35px;
-    font-weight: bold;
-    color: #667eea;
+  font-family: "Orbitron", sans-serif;
+  font-size: 42px;
+  font-weight: 800;
+  color: var(--cyan);
+  text-shadow: 0 0 18px #22d3ee88;
+}
+
+.score:first-child p {
+  color: var(--purple);
+  text-shadow: 0 0 18px #a855f788;
+}
+
+.score-divider {
+  color: var(--pink);
+  font-family: "Orbitron", sans-serif;
+  font-size: 14px;
+}
+
+.target-score {
+  color: var(--muted);
+  font-size: 12px;
+  margin-bottom: 30px;
+}
+
+/* STATUS */
+
+.game-status {
+  min-height: 75px;
+  margin-bottom: 24px;
 }
 
 #turn {
-    font-size: 18px;
-    color: #444;
-    margin-bottom: 25px;
+  font-family: "Orbitron", sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--cyan);
+  margin-bottom: 8px;
 }
 
+#game-message {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* CHOICE BUTTONS */
+
 .choices {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 14px;
 }
 
 .choice {
-    background: #f3f4f6;
-    border: 2px solid transparent;
-    border-radius: 15px;
-    padding: 18px 15px;
-    font-size: 35px;
-    cursor: pointer;
-    transition: 0.3s;
-    flex: 1;
+  flex: 1;
+  min-width: 0;
+  padding: 20px 10px;
+  border-radius: 17px;
+  border: 1px solid #ffffff18;
+  background: var(--surface-light);
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
 }
 
-.choice span {
-    display: block;
-    font-size: 14px;
-    font-weight: bold;
-    margin-top: 8px;
-    color: #444;
+.choice-icon {
+  display: block;
+  font-size: 37px;
+  margin-bottom: 12px;
+  transition: transform 0.25s ease;
 }
 
-.choice:hover {
-    background: #e0e7ff;
-    border-color: #667eea;
-    transform: translateY(-5px);
+.choice:hover:not(:disabled) {
+  background: #282344;
+  border-color: var(--purple);
+  transform: translateY(-6px);
+
+  box-shadow:
+    0 0 15px #a855f755,
+    inset 0 0 15px #a855f711;
 }
+
+.choice:hover:not(:disabled) .choice-icon {
+  transform: scale(1.15);
+}
+
+.choice:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+.choice:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* RESULT PANEL */
 
 .result-box {
-    background: #f8f9fa;
-    padding: 20px;
-    border-radius: 15px;
-    margin-top: 25px;
-    line-height: 2;
+  background: #080d1d;
+  border: 1px solid #22d3ee22;
+  border-radius: 18px;
+  padding: 22px 15px;
+  margin-top: 25px;
+  line-height: 1.8;
+}
+
+.result-box span {
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--muted);
+}
+
+.result-box p {
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 600;
 }
 
 #result {
-    color: #667eea;
-    margin-top: 10px;
-    font-size: 22px;
+  font-family: "Orbitron", sans-serif;
+  font-size: 18px;
+  margin-top: 14px;
+  color: var(--cyan);
 }
 
-.reset-btn {
-    background: #667eea;
-    color: white;
-    border: none;
-    padding: 13px 25px;
-    border-radius: 10px;
-    margin-top: 25px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
+#result.win {
+  color: var(--green);
+  text-shadow: 0 0 15px #4ade8088;
 }
 
-.reset-btn:hover {
-    background: #4f46e5;
-    transform: scale(1.05);
+#result.lose {
+  color: var(--red);
+  text-shadow: 0 0 15px #fb718588;
 }
 
-@media (max-width: 400px) {
-    .game-container {
-        padding: 25px 15px;
-    }
+#result.draw {
+  color: #fbbf24;
+}
 
-    h1 {
-        font-size: 23px;
-    }
+/* GAME CONTROLS */
 
-    .choices {
-        gap: 8px;
-    }
+.game-controls {
+  display: flex;
+  gap: 12px;
+  margin-top: 25px;
+}
 
-    .choice {
-        padding: 15px 8px;
-    }
+.game-controls button {
+  flex: 1;
+  padding: 15px 12px;
+  border-radius: 12px;
+  border: none;
+  font-size: 13px;
+  font-weight: 800;
+  font-family: "Orbitron", sans-serif;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.start-btn {
+  color: #080b18;
+  background: linear-gradient(110deg, var(--cyan), #67e8f9);
+
+  box-shadow: 0 0 20px #22d3ee44;
+}
+
+.start-btn:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 0 28px #22d3ee88;
+}
+
+.restart-btn {
+  color: var(--text);
+  background: #222c46;
+  border: 1px solid #a855f766 !important;
+}
+
+.restart-btn:hover:not(:disabled) {
+  background: #352451;
+  box-shadow: 0 0 18px #a855f744;
+  transform: translateY(-3px);
+}
+
+.game-controls button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* FOOTER */
+
+footer {
+  margin-top: 30px;
+  font-size: 11px;
+  color: #64748b;
+  letter-spacing: 0.4px;
+}
+
+/* ACCESSIBILITY */
+
+button:focus-visible {
+  outline: 3px solid var(--cyan);
+  outline-offset: 4px;
+}
+
+/* MOBILE */
+
+@media (max-width: 480px) {
+  body {
+    padding: 12px;
+  }
+
+  .game-container {
+    padding: 27px 16px;
+    border-radius: 20px;
+  }
+
+  .subtitle {
+    font-size: 12px;
+  }
+
+  .score-board {
+    padding: 19px 8px;
+  }
+
+  .score h3 {
+    font-size: 10px;
+  }
+
+  .score p {
+    font-size: 34px;
+  }
+
+  .choices {
+    gap: 8px;
+  }
+
+  .choice {
+    padding: 17px 5px;
+    font-size: 12px;
+  }
+
+  .choice-icon {
+    font-size: 30px;
+  }
+
+  #turn {
+    font-size: 14px;
+  }
+
+  #result {
+    font-size: 15px;
+  }
+
+  .game-controls {
+    flex-direction: column;
+  }
+
+  .game-controls button {
+    width: 100%;
+    padding: 15px;
+  }
+}
+
+/* REDUCED MOTION */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
 }
